@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <!-- navbar -->
+    <nav class="navbar">
+      <div class="navbar-center">
+          <span class="nav-icon">
+              <img src="../../../Gadget Zone.png" alt="store logo"> 
+          </span>
+          <nav class="nbar">
+              <ul>
+                  <li class="item"><a href="../../../index.html">Home</a></li>
+                  <li class="item"><a href="./index.html" class="signup">Account</a></li>
+                  <li class="item"><a href="#">About</a></li>
+              </ul>
+          </nav>
+      </div>
+  </nav>
+  <!-- end of navbar -->
+    <div class="signupFrm">
+        <form action="" class="form">
+          <h1 class="title">Sign up</h1>
+    
+          <div class="inputContainer">
+            <input type="text" class="input" placeholder="Email" id="email" name="email" aria-required="">
+            <label for="" class="label">Email</label>
+          </div>
+    
+          <div class="inputContainer">
+            <input type="text" class="input" placeholder="Username" id="name" name="name" aria-required="">
+            <label for="" class="label">Username</label>
+          </div>
+    
+          <div class="inputContainer">
+            <input type="text" class="input" placeholder="Password" id="password" name="password" autocomplete="off" aria-required="">
+            <label for="" class="label">Password</label>
+          </div>
+    
+          <div class="inputContainer">
+            <input type="text" class="input" placeholder="Phone No." id="phno" name="phno" aria-required="">
+            <label for="" class="label">Phone No</label>
+          </div>
+          <div class="acc">Already have an account?</div>
+          <button class= "signup-btn"><a href="./login.html" class="signup">Sign IN</a></button>
+          <input type="submit" class="submitBtn" value="Sign up" id="submit">
+        </form>
+      </div>
+    <script>
+        document.getElementById("submit").addEventListener("click",(e)=>{
+            e.stopPropagation();
+            fetch("http://localhost:3000/sign_up", {
+                method:"POST",
+                mode: "cors",
+                body:JSON.stringify({
+                    name: document.getElementById("name").value,
+                    email: document.getElementById("email").value,
+                    phno: document.getElementById("phno").value,
+                    password: document.getElementById("password").value
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            }).then((response)=>{
+                if(response.status===200){
+                    location.href= response.url
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
+
